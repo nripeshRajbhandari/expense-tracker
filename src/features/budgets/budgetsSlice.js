@@ -16,6 +16,24 @@ const initialState = CATEGORIES.map((category) => ({
   amount: 0,
 }));
 
+export const budgetsSlice = createSlice({
+	name: 'budgets',
+	initialState: initialState,
+	reducers: {
+    editBudget: (state, action ) => {
+      const { category, amount } = action.payload ;
+      state.forEach( (budget,key) => {
+        if (budget.category === category){
+           state[key].amount = amount;
+        }
+      })     
+     }		
+	},
+});
+
+// OR 
+// Another method for the same output as above is given below:
+
 // export const budgetsSlice = createSlice({
 // 	name: 'budgets',
 // 	initialState: initialState,
@@ -30,21 +48,6 @@ const initialState = CATEGORIES.map((category) => ({
 // 	},
 // });
 
-export const budgetsSlice = createSlice({
-	name: 'budgets',
-	initialState: initialState,
-	reducers: {
-    editBudget: (state, action ) => {
-      const { category, amount } = action.payload ;
-
-      state.forEach( (budget,key) => {
-        if (budget.category === category){
-          state[key].amount = amount;
-        }
-      })     
-     }		
-	},
-});
 
 export const selectBudgets = (state) => state.budgets;
 
